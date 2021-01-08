@@ -1,45 +1,22 @@
 package com.example.demo.model;
 
-import com.example.demo.entity.MasterService;
+import com.example.demo.entity.MasterSer;
 import com.example.demo.entity.Partner;
+import com.sun.istack.NotNull;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
-
+@Data
 public class MasterDTO {
+
     private int masterId;
     private String masterName;
+    private String masterAmount;
     private List<Partner> partners ;
-    private List<MasterService> masterServices;
+    private List<MasterSer> masterServices;
 
-    public int getMasterId() {
-        return masterId;
-    }
 
-    public void setMasterId(int masterId) {
-        this.masterId = masterId;
-    }
-
-    public String getMasterName() {
-        return masterName;
-    }
-
-    public void setMasterName(String masterName) {
-        this.masterName = masterName;
-    }
-
-    public List<Partner> getPartners() {
-        return partners;
-    }
-
-    public void setPartners(List<Partner> partners) {
-        this.partners = partners;
-    }
-
-    public List<MasterService> getMasterServices() {
-        return masterServices;
-    }
-
-    public void setMasterServices(List<MasterService> masterServices) {
-        this.masterServices = masterServices;
-    }
 }

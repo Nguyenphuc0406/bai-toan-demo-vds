@@ -9,9 +9,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface PartnerRepository extends JpaRepository<Partner, Integer> {
     Partner findByPartnerId(int partnerId);
+
+    //find partner by master
+    List<Partner> findByMasterPartner(Master master);
+
     // use JPQL in hibernate for delete Partner
     // when use @Query, method name not valid
     @Transactional
@@ -20,7 +26,7 @@ public interface PartnerRepository extends JpaRepository<Partner, Integer> {
     void deletePartnerByPartnerId(@Param("partnerId") int partnerId);
     @Transactional
     @Modifying
-    @Query(value = "update Partner p set p.partnerName = ?1, p.partnerAmount=?2," +
-            " p.masterPartner = ?3 where p.partnerId =?4")
-    void updatePartner(String partnerName, String partnerAmount, Master masterPartner, int partnerId);
+    @Query("update Partner p set p.partnerName = ?1, p.partnerAmount= ?2," +
+            " p.masterPartner = ?3 where p.partnerId = ?4")
+    void updatePartner(String partnerName, String partnerAmount, Master masterId, int partnerId);
 }

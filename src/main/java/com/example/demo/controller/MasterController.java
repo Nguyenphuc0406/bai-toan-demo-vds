@@ -3,9 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.base.response.BaseResponse;
 import com.example.demo.model.MasterDTO;
 import com.example.demo.model.PartnerDTO;
-import com.example.demo.service.MasterSerService;
-import com.example.demo.service.PartnerSerService;
-import com.example.demo.service.impl.PartnerSerServiceImpl;
+import com.example.demo.service.MasterService;
+import com.example.demo.service.PartnerService;
 import com.example.demo.utils.ConfigUrl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MasterController {
     @Autowired
-    MasterSerService masterService;
+    MasterService masterService;
     @Autowired
-    PartnerSerService partnerService;
+    PartnerService partnerService;
 
     @PostMapping(ConfigUrl.URL_MASTER)
-    public BaseResponse addSystem(@RequestBody MasterDTO masterDTO) {
+    public BaseResponse addMaster(@RequestBody MasterDTO masterDTO) {
         return masterService.addMaster(masterDTO);
     }
 
@@ -30,7 +29,13 @@ public class MasterController {
     public BaseResponse deletePartner(@PathVariable("id") int partnerId){
         return partnerService.delPartner(partnerId);
     }
-
-
+    @PutMapping(path =ConfigUrl.URL_MASTER_AC_PARTNER + "/{id}")
+    public BaseResponse updatePartner(@PathVariable("id") int partnerId, @RequestBody PartnerDTO partnerDTO){
+        return partnerService.updatePartner(partnerId, partnerDTO);
+    }
+    @GetMapping(path = ConfigUrl.URL_MASTER_AC_PARTNER)
+    public  BaseResponse getAllPartner(){
+        return partnerService.getAllPartner();
+    }
 
 }

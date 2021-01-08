@@ -1,13 +1,19 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="master")
+@Table(name = "master")
+@Getter
+@Setter
+
 public class Master {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,40 +21,13 @@ public class Master {
     private int masterId;
     @Column(name = "MASTER_NAME")
     private String masterName;
+    @Column(name = "MASTER_AMOUNT")
+    private String masterAmount;
     @OneToMany(mappedBy = "masterPartner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Partner> partners = new ArrayList<>();
     @OneToMany(mappedBy = "masterService", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<MasterService> masterServices = new ArrayList<>();
+    private List<MasterSer> masterServices = new ArrayList<>();
 
-    public int getMasterId() {
-        return masterId;
-    }
 
-    public void setMasterId(int masterId) {
-        this.masterId = masterId;
-    }
-
-    public String getMasterName() {
-        return masterName;
-    }
-
-    public void setMasterName(String masterName) {
-        this.masterName = masterName;
-    }
-
-    public List<Partner> getPartners() {
-        return partners;
-    }
-
-    public void setPartners(List<Partner> partners) {
-        this.partners = partners;
-    }
-
-    public List<MasterService> getMasterServices() {
-        return masterServices;
-    }
-
-    public void setMasterServices(List<MasterService> masterServices) {
-        this.masterServices = masterServices;
-    }
 }

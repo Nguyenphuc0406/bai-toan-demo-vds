@@ -1,14 +1,13 @@
 package com.example.demo.service;
 
 import com.example.demo.base.response.BaseResponse;
-import com.example.demo.entity.Partner;
 import com.example.demo.model.PartnerDTO;
-
-import java.util.List;
+import com.example.demo.model.PartnerSerDTO;
 
 public interface PartnerSerService {
-    public BaseResponse addPartner(PartnerDTO partnerDTO);
-    public BaseResponse delPartner(int partnerId);
-    public BaseResponse updatePartner(int partnerId,PartnerDTO partnerDTO );
-    public List<Partner> getAllPartner();
+    public BaseResponse addPartnerSer(PartnerSerDTO partnerSerDTO);
+    public BaseResponse delPartnerSer(int partnerSerId);
+    public BaseResponse updatePartnerSer(int partnerSerId, PartnerSerDTO partnerSerDTO );
+    public BaseResponse getAllPartnerSer();
+    public BaseResponse getServiceByPartnerId(int partnerId);
 }

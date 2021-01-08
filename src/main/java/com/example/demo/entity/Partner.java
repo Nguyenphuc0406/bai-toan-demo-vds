@@ -1,11 +1,15 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
 //@JsonIgnoreType
 @Entity
 @Table(name = "partner")
@@ -22,11 +26,12 @@ public class Partner {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @NotNull
     @JoinColumn(name = "MASTER_ID")
+    @JsonBackReference
     private Master masterPartner;
 
     @OneToMany(mappedBy = "partner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<PartnerService> partnerServices = new ArrayList<>();
-    @OneToMany(mappedBy = "partnerClient", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+    private List<PartnerSer> partnerServices = new ArrayList<>();
+    @OneToMany(mappedBy = "partnerClient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Client> clients = new ArrayList<>();
 
     public int getPartnerId() {
@@ -53,6 +58,7 @@ public class Partner {
         this.partnerAmount = partnerAmount;
     }
 
+    @JsonIgnore
     public Master getMasterPartner() {
         return masterPartner;
     }
@@ -61,11 +67,11 @@ public class Partner {
         this.masterPartner = masterPartner;
     }
 
-    public List<PartnerService> getPartnerServices() {
+    public List<PartnerSer> getPartnerServices() {
         return partnerServices;
     }
 
-    public void setPartnerServices(List<PartnerService> partnerServices) {
+    public void setPartnerServices(List<PartnerSer> partnerServices) {
         this.partnerServices = partnerServices;
     }
 

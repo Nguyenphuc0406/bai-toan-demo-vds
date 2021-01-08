@@ -1,10 +1,15 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
+@Data
 @Table(name = "transaction")
 public class Transaction {
     @Id
@@ -17,39 +22,14 @@ public class Transaction {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CLIENT_ID")
     private Client client;
+    @Column(name = "TRANSACTION_PHONE")
+    private String transactionPhone;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PARTNER_SERVICE_ID")
-    private PartnerService partnerService;
+    private PartnerSer partnerService;
+    @Column(name = "PARTNER_ID")
+    private int partnerId;
+    @Column(name = "TRANSACTION_TIME")
+    private String transactionTime;
 
-    public int getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public String getTransactionAmount() {
-        return transactionAmount;
-    }
-
-    public void setTransactionAmount(String transactionAmount) {
-        this.transactionAmount = transactionAmount;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public PartnerService getPartnerService() {
-        return partnerService;
-    }
-
-    public void setPartnerService(PartnerService partnerService) {
-        this.partnerService = partnerService;
-    }
 }
