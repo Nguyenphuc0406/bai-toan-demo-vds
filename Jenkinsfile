@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage('Clone'){
         steps{
-            git 'https://nguyenphuc46@bitbucket.org/nguyenphuc46/api-demo.git'
+            git 'https://bitbucket.org/nguyenphuc46/api-demo.git'
 //             sh 'sudo systemctl restart spring-boot-hello'
             }
             }
