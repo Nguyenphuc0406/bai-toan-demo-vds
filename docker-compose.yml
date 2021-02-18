@@ -1,0 +1,34 @@
+version: '3.5'
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql_demo
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: thuctap
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    networks:
+      - my-network
+    volumes:
+        - /home/phucnd/test_docker/demo_vds/database:/var/lib/mysql
+
+  app:
+    container_name: app
+    build: .
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql
+    networks:
+      - my-network
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/thuctap?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+networks:
+  my-network: # tạo network
+    driver: bridge
